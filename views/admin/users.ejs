@@ -3,8 +3,8 @@
     <div>
       <h3><%= user.firstName %> <%= user.lastName %> </h4>
       <p><%= user.username %> </p>
-      <button class="edit-btn">Edit</button>
-      <button class="delete-btn">Delete</button>
+      <button class="edit-btn" data-id="<%= user.id %>">Edit</button>
+      <button class="delete-btn" data-id="<%= user.id %>">Delete</button>
     </div>
   <% }); %> 
 <script src="./js/index.js"></script>

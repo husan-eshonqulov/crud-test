@@ -28,7 +28,7 @@ class User {
             ]
           );
         } else {
-          return Promise.resolve('username taken');
+          return 'username taken';
         }
       })
       .catch((err) => {
@@ -36,7 +36,16 @@ class User {
       });
   }
 
-  static deleteById() {}
+  static deleteById(id) {
+    return db
+      .execute('DELETE FROM users WHERE id = ?', [id])
+      .then((res) => {
+        return res[0];
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }
 
   static fetchAll() {
     return db
