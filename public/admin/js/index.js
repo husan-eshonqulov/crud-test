@@ -15,11 +15,20 @@ const handleDeleteBtn = (e) => {
     method: 'POST',
     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
     body: JSON.stringify({ id }),
-  });
-  // .then((res) => console.log(res))
-  // .catch((err) => {
-  //   throw err;
-  // });
+  })
+    .then((res) => {
+      res
+        .json()
+        .then((loc) => {
+          if (loc !== 'not exist') {
+            window.location.href = `http://localhost:3000${loc}`;
+          }
+        })
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => {
+      throw err;
+    });
 };
 
 editBtns.forEach((editBtn) => {

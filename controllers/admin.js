@@ -15,9 +15,9 @@ exports.postDeleteUser = (req, res) => {
   User.deleteById(userId)
     .then((r) => {
       if (r.affectedRows === 0) {
-        return res.send('not exist');
+        return res.send(JSON.stringify('not exist'));
       }
-      res.redirect('/users');
+      res.send(JSON.stringify('/admin/users'));
     })
     .catch((err) => {
       throw err;

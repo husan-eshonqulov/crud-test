@@ -2,7 +2,7 @@
   <% users.forEach((user) => { %>
     <div>
       <h3><%= user.firstName %> <%= user.lastName %> </h4>
-      <p><%= user.username %> </p>
+      <p>username: <%= user.username %> </p>
     </div>
   <% }); %>    
 <%- include('../includes/end.ejs') %> 
