@@ -1,0 +1,11 @@
+<%- include('../includes/head.ejs') %> 
+  <% users.forEach((user) => { %>
+    <div>
+      <h3><%= user.firstName %> <%= user.lastName %> </h4>
+      <p><%= user.username %> </p>
+      <button class="edit-btn">Edit</button>
+      <button class="delete-btn">Delete</button>
+    </div>
+  <% }); %> 
+<script src="./admin.js"></script>
+<%- include('../includes/end.ejs') %>
