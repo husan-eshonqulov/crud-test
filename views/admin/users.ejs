@@ -3,8 +3,11 @@
     <div>
       <h3><%= user.firstName %> <%= user.lastName %> </h4>
       <p>username: <%= user.username %> </p>
-      <button class="edit-btn" data-id="<%= user.id %>">Edit</button>
-      <button class="delete-btn" data-id="<%= user.id %>">Delete</button>
+      <a href="/admin/edit-user/<%= user.id %>">Edit</a>
+      <form action="/admin/delete-user" method="POST">
+        <input type="hidden" name="userId" value="<%= user.id %>">
+        <button type="submit" class="delete-btn">Delete</button>
+      </form>
     </div>
   <% }); %> 
 <script src="./js/index.js"></script>

@@ -1,8 +1,7 @@
 const db = require('../util/database');
 
 class User {
-  constructor(id, firstName, lastName, username, password, createAt, updateAt) {
-    this.id = id;
+  constructor(firstName, lastName, username, password, createAt, updateAt) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.username = username;
@@ -47,6 +46,33 @@ class User {
       });
   }
 
+  static editById(id, firstname, lastname, username, password, updateAt) {
+    return db
+      .execute('SELECT * FROM users WHERE id = ?', [id])
+      .then((users) => {
+        if (users[0].length !== 0) {
+          return db.execute(
+            'UPDATE users SET firstName = ?, lastName = ?, username = ?, password = ?, updateAt = ? WHERE id = ?',
+            [firstname, lastname, username, password, updateAt, id]
+          );
+        }
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  static findById(id) {
+    return db
+      .execute('SELECT * FROM users WHERE id = ?', [id])
+      .then((users) => {
+        return users[0][0];
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }
+
   static fetchAll() {
     return db
       .execute('SELECT * FROM users')
@@ -57,8 +83,6 @@ class User {
         throw err;
       });
   }
-
-  static findById() {}
 }
 
 module.exports = User;

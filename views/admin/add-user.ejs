@@ -1,0 +1,54 @@
+<%- include('../includes/head.ejs') %>
+<form
+  action="/admin/<% if (editing) { %>edit-user<% } else { %>add-user<% } %>"
+  method="POST"
+>
+  <div>
+    <label for="firstname">Firstname:</label>
+    <input
+      type="text"
+      id="firstname"
+      name="firstname"
+      value="<% if (editing) { %><%= user.firstName %><% } %>"
+    />
+  </div>
+
+  <div>
+    <label for="lastname">Lastname:</label>
+    <input
+      type="text"
+      id="lastname"
+      name="lastname"
+      value="<% if (editing) { %><%= user.lastName %><% } %>"
+    />
+  </div>
+
+  <div>
+    <label for="username">Username:</label>
+    <input
+      type="text"
+      id="username"
+      name="username"
+      value="<% if (editing) { %><%= user.username %><% } %>"
+    />
+  </div>
+
+  <div>
+    <label for="password">Password:</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      value="<% if (editing) { %><%= user.password %><% } %>"
+    />
+  </div>
+
+  <% if (editing) { %>
+  <input type="hidden" name="userId" value="<%= user.id %>" />
+  <% } %>
+
+  <button type="submit">
+    <% if (editing) { %>Edit User<% } else { %>Add User<% } %>
+  </button>
+</form>
+<%- include('../includes/end.ejs') %>

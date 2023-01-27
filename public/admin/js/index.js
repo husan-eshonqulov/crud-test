@@ -3,17 +3,27 @@ const deleteBtns = document.querySelectorAll('.delete-btn');
 
 const handleEditBtn = (e) => {
   const id = e.target.dataset.id;
-  fetch('/admin/edit-user', {
-    method: 'POST',
-    body: { id },
-  });
+  fetch(`/admin/edit-user/${id}`)
+    .then((res) => {
+      res
+        .json()
+        .then((r) => {
+          window.location.href = 'http://localhost:3000/admin/add-user';
+        })
+        .catch((err) => {
+          throw err;
+        });
+    })
+    .catch((err) => {
+      throw err;
+    });
 };
 
 const handleDeleteBtn = (e) => {
   const id = e.target.dataset.id;
   fetch('/admin/delete-user', {
     method: 'POST',
-    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id }),
   })
     .then((res) => {
