@@ -15,20 +15,20 @@ exports.getAddUser = (req, res) => {
 };
 
 exports.postAddUser = (req, res) => {
-  const firstName = req.body.firstname;
-  const lastName = req.body.lastname;
-  const userName = req.body.username;
+  const firstname = req.body.firstname;
+  const lastname = req.body.lastname;
+  const username = req.body.username;
   const password = req.body.password;
-  const createAt = new Date();
-  const updateAt = new Date();
+  const createdAt = new Date();
+  const updatedAt = new Date();
 
   const user = new User(
-    firstName,
-    lastName,
-    userName,
+    firstname,
+    lastname,
+    username,
     password,
-    createAt,
-    updateAt
+    createdAt,
+    updatedAt
   );
 
   user
@@ -60,14 +60,15 @@ exports.getEditUser = (req, res) => {
 };
 
 exports.postEditUser = (req, res) => {
-  const userId = req.body.userId;
-  const firstname = req.body.firstname;
-  const lastname = req.body.lastname;
-  const username = req.body.username;
-  const password = req.body.password;
-  const updateAt = new Date();
-
-  User.editById(userId, firstname, lastname, username, password, updateAt)
+  const updatedUser = {
+    userId: req.body.userId,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    username: req.body.username,
+    password: req.body.password,
+    updatedAt: new Date(),
+  };
+  User.editById(updatedUser.userId, updatedUser)
     .then((r) => {
       if (r[0].affectedRows === 0) {
         return res.send('not edited');

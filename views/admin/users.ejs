@@ -1,7 +1,7 @@
 <%- include('../includes/head.ejs') %> 
   <% users.forEach((user) => { %>
     <div>
-      <h3><%= user.firstName %> <%= user.lastName %> </h4>
+      <h3><%= user.firstname %> <%= user.lastname %> </h4>
       <p>username: <%= user.username %> </p>
       <a href="/admin/edit-user/<%= user.id %>">Edit</a>
       <form action="/admin/delete-user" method="POST">
@@ -10,5 +10,4 @@
       </form>
     </div>
   <% }); %> 
-<script src="./js/index.js"></script>
 <%- include('../includes/end.ejs') %>
