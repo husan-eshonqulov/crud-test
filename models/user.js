@@ -1,13 +1,13 @@
 const db = require('../util/database');
 
 class User {
-  constructor(firstname, lastname, username, password, createdAt, updatedAt) {
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.username = username;
-    this.password = password;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
+  constructor(user) {
+    this.firstname = user.firstname;
+    this.lastname = user.lastname;
+    this.username = user.username;
+    this.password = user.password;
+    this.createdAt = user.createdAt;
+    this.updatedAt = user.updatedAt;
   }
 
   save() {

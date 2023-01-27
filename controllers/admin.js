@@ -15,23 +15,18 @@ exports.getAddUser = (req, res) => {
 };
 
 exports.postAddUser = (req, res) => {
-  const firstname = req.body.firstname;
-  const lastname = req.body.lastname;
-  const username = req.body.username;
-  const password = req.body.password;
-  const createdAt = new Date();
-  const updatedAt = new Date();
+  const user = {
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    username: req.body.username,
+    password: req.body.password,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
 
-  const user = new User(
-    firstname,
-    lastname,
-    username,
-    password,
-    createdAt,
-    updatedAt
-  );
+  const newUser = new User(user);
 
-  user
+  newUser
     .save()
     .then((r) => {
       if (r === 'username taken') {
@@ -68,6 +63,7 @@ exports.postEditUser = (req, res) => {
     password: req.body.password,
     updatedAt: new Date(),
   };
+
   User.editById(updatedUser.userId, updatedUser)
     .then((r) => {
       if (r[0].affectedRows === 0) {
@@ -82,16 +78,14 @@ exports.postEditUser = (req, res) => {
 
 exports.postDeleteUser = (req, res) => {
   const userId = req.body.userId;
-  if (userId) {
-    User.deleteById(userId)
-      .then((r) => {
-        if (r.affectedRows === 0) {
-          return res.render('user/username-taken');
-        }
-        res.redirect('/admin/users');
-      })
-      .catch((err) => {
-        throw err;
-      });
-  }
+  User.deleteById(userId)
+    .then((r) => {
+      if (r.affectedRows === 0) {
+        return res.render('user/username-taken');
+      }
+      res.redirect('/admin/users');
+    })
+    .catch((err) => {
+      throw err;
+    });
 };
