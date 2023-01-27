@@ -1,48 +1,36 @@
 <%- include('../includes/head.ejs') %>
 <form
   action="/admin/<% if (editing) { %>edit-user<% } else { %>add-user<% } %>"
-  method="POST"
+  method="POST" class="m-3"
 >
-  <div>
-    <label for="firstname">Firstname:</label>
-    <input
-      type="text"
-      id="firstname"
-      name="firstname"
-      value="<% if (editing) { %><%= user.firstname %><% } %>"
-    />
+  <div class="mb-3">
+    <label for="firstname" class="form-label">Firstname</label>
+    <input type="text" class="form-control" id="firstname" name="firstname" 
+      value="<% if (editing) { %><%= user.firstname %><% } %>" placeholder="Jhon">
   </div>
 
-  <div>
-    <label for="lastname">Lastname:</label>
-    <input
-      type="text"
-      id="lastname"
-      name="lastname"
-      value="<% if (editing) { %><%= user.lastname %><% } %>"
-    />
+  <div class="mb-3">
+    <label for="lastname" class="form-label">Lastname</label>
+    <input type="text" class="form-control" id="lastname" name="lastname" 
+      value="<% if (editing) { %><%= user.lastname %><% } %>" placeholder="Doe">
   </div>
 
-  <div>
-    <label for="username">Username:</label>
-    <input
-      type="text"
-      id="username"
-      name="username"
-      value="<% if (editing) { %><%= user.username %><% } %>"
-    />
+  <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input type="text" class="form-control" id="username" name="username" 
+      value="<% if (editing) { %><%= user.username %><% } %>" placeholder="jhon doe">
   </div>
 
-  <div>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" />
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password" name="password" placeholder="password"> 
   </div>
 
   <% if (editing) { %>
   <input type="hidden" name="userId" value="<%= user.id %>" />
   <% } %>
 
-  <button type="submit">
+  <button type="submit" class="btn btn-primary">
     <% if (editing) { %>Edit User<% } else { %>Add User<% } %>
   </button>
 </form>

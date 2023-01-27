@@ -1,13 +1,18 @@
 <%- include('../includes/head.ejs') %> 
+<div class="d-flex flex-wrap">
   <% users.forEach((user) => { %>
-    <div>
-      <h3><%= user.firstname %> <%= user.lastname %></h4>
-      <p>username: <%= user.username %></p>
-      <a href="/admin/edit-user/<%= user.id %>">Edit</a>
-      <form action="/admin/delete-user" method="POST">
-        <input type="hidden" name="userId" value="<%= user.id %>">
-        <button type="submit" class="delete-btn">Delete</button>
-      </form>
+    <div class="card m-3" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title"><%= user.firstname %> <%= user.lastname %></h5>
+        <h6 class="card-subtitle mb-2 text-muted"><%= user.username %></h6>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a class="btn btn-success" href="/admin/edit-user/<%= user.id %>">Edit</a>
+        <form action="/admin/delete-user" method="POST" class="d-inline">
+          <input type="hidden" name="userId" value="<%= user.id %>">
+          <button type="submit" class="btn btn-danger delete-btn ms-1">Delete</button>
+        </form>
+      </div>
     </div>
-  <% }); %> 
+  <% }) %>    
+</div>
 <%- include('../includes/end.ejs') %>
