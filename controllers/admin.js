@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 const User = require('../models/user');
 
 exports.getUsers = (req, res) => {
@@ -15,24 +17,27 @@ exports.getAddUser = (req, res) => {
 };
 
 exports.postAddUser = (req, res) => {
-  const user = {
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    username: req.body.username,
-    password: req.body.password,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
+  bcrypt
+    .hash(req.body.password, 10)
+    .then((hashedPassword) => {
+      const user = {
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        username: req.body.username,
+        password: hashedPassword,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
 
-  const newUser = new User(user);
-
-  newUser
-    .save()
-    .then((r) => {
-      if (r === 'username taken') {
-        return res.render('user/username-taken');
-      }
-      res.redirect('/users');
+      const newUser = new User(user);
+      newUser.save().then((r) => {
+        if (r === 'username taken') {
+          return res.render('user/username-taken', {
+            pageTitle: 'Username Taken',
+          });
+        }
+        res.redirect('/users');
+      });
     })
     .catch((err) => {
       throw err;
